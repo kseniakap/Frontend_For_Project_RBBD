@@ -1,0 +1,14 @@
+.search {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  top: 40px;
+  left: 48%;
+  transform: translateX(-50%);
+  margin-bottom: 20px;
+  input {
+    padding: 5px 10px;
+    width: 300px;
+    outline: none;
+  }
+}

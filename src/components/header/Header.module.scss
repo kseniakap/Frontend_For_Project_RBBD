@@ -1,0 +1,58 @@
+header {
+  background-color: rgba(0, 0, 0, 0.06);
+  height: 100px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-bottom: 50px;
+  position: relative;
+}
+.wrapper {
+  display: flex;
+  justify-content: end;
+}
+.logo {
+  font-size: 25px;
+}
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  left: 30px;
+  top: 150px;
+  li {
+    width: 200px;
+    min-height: 40px;
+    a {
+      padding: 15px 20px;
+      display: block;
+      border-radius: 10px;
+    }
+  }
+}
+.logInOut {
+  position: absolute;
+  right: 40px;
+  top: 35px;
+  button {
+    padding: 10px 20px;
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+    transition: 0.3s all ease-in;
+    cursor: pointer;
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+}
+.addNewPost {
+  padding: 20px;
+  background-color: #fff;
+  position: absolute;
+  top: 20px;
+  left: 100px;
+  text-align: center;
+}

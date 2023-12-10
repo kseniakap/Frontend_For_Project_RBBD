@@ -3,12 +3,13 @@ import { AiFillEye, AiOutlineMessage } from 'react-icons/ai'
 import Moment from 'react-moment'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { useNavigate } from 'react-router-dom'
 import { checkPostAdmin } from '../../redux/features/post/postSlice'
+import { useLocation } from 'react-router-dom'
 import st from './PostItem.module.scss'
 
 export const PostItem = ({ post }) => {
   const dispatch = useDispatch()
+  const location = useLocation()
 
   const [addPost, setAddPost] = useState(false)
   //Опубликован ли пост
@@ -21,14 +22,13 @@ export const PostItem = ({ post }) => {
     try {
       setAddPost(true)
       dispatch(checkPostAdmin({ id, checkAdmin: true }))
-
     } catch (error) {
       console.log(error)
     }
   }
   // console.log(post)
   return (
-    <Link to={`/${post._id}`}>
+    <Link to={`/${post._id}`} className={st.post}>
       {!post.checkAdmin && (
         <button
           className={st.publishBtn}
@@ -40,36 +40,33 @@ export const PostItem = ({ post }) => {
           {addPost ? 'Добавлен' : 'Опубликовать'}
         </button>
       )}
-
-      <div className="flex flex-col basis-1/4 flex-grow">
-        <div
-          className={post.imgUrl ? 'flex rouded-sm h-80' : 'flex rounded-sm'}
-        >
+      <div className={st.content}>
+        <div className={post.imgUrl ? st.image : st.notImage}>
           {post.imgUrl && (
             <img
               src={`http://localhost:3006/${post.imgUrl}`}
-              alt="img"
-              className="object-cover w-full"
+              alt="Изображение"
             />
           )}
         </div>
-        <div className="flex justify-between items-center pt-2">
-          <div className="text-xs opacity-50">{post.username}</div>
-          <div className="text-xs  opacity-50">
-            <Moment date={post.createdAt} format="D MMM YYYY" />
+        <div className={st.infoPost}>
+          <div className={st.name}>{post.username}</div>
+          <div className={st.data}>
+            <Moment date={post.createdAt} format="DD.MM.YYYY" />
           </div>
         </div>
-        <div className="   text-xl">{post.title}</div>
-        <p>{post.artist}</p>
-
-        <div className="flex gap-3 items-center mt-2">
-          <button className="flex items-center justify-center gap-2 text-xs  opacity-50">
-            <AiFillEye /> <span>{post.views}</span>
-          </button>
-          <button className="flex items-center justify-center gap-2 text-xs  opacity-50">
-            <AiOutlineMessage /> <span>{post.comments?.length || 0} </span>
-          </button>
-        </div>
+        <div className={st.title}>{post.title}</div>
+        <p className={st.artist}>{post.artist}</p>
+        {!location.pathname.includes('/admin') && (
+          <div className={st.bottom}>
+            <button className={st.views}>
+              <AiFillEye /> <span>{post.views}</span>
+            </button>
+            <button className={st.comments}>
+              <AiOutlineMessage /> <span>{post.comments?.length || 0} </span>
+            </button>
+          </div>
+        )}
       </div>
     </Link>
   )

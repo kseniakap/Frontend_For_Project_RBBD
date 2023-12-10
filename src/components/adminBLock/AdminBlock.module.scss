@@ -1,0 +1,22 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  height: 900px;
+  overflow: auto;
+}
+.title {
+  margin-bottom: 20px;
+  text-align: center;
+}
+.lastAddition {
+  position: absolute;
+  top: 150px;
+  right: 100px;
+}
+.subtitle {
+  margin-bottom: 5px;
+}

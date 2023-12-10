@@ -1,46 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { PopularPosts } from '../components/PopularPosts'
 import { PostItem } from '../components/postItem/PostItem'
 import { getAllPosts } from '../redux/features/post/postSlice'
+import Search from '../components/search/Search'
 
 export const MainPage = () => {
   const dispatch = useDispatch()
-  const { posts, popularPosts } = useSelector((state) => state.post)
-
-//   console.log(popularPosts)
+  const { posts } = useSelector((state) => state.post)
+  const [seachByName, setSeachByName] = useState('')
+  const [seachByArtist, setSeachByArtist] = useState('')
 
   useEffect(() => {
     dispatch(getAllPosts())
   }, [dispatch])
 
-  if (!posts.length) {
-    return (
-      <div className="text-xl text-center text-white py-10">
-        Постов не существует.
-      </div>
-    )
+  if (!posts?.length) {
+    return <p>Посты еще не добавлены</p>
   }
+  const allFilter = posts
+    ?.filter((item) => item?.checkAdmin === true)
+    .filter((item) =>
+      item.title.toLowerCase().includes(seachByName.toLowerCase()),
+    )
+    .filter((item) =>
+      item.artist.toLowerCase().includes(seachByArtist.toLowerCase()),
+    )
 
   return (
-    <div className="max-w-[900px] mx-auto py-10">
-      <div className="flex justify-between gap-8">
-        <div className="flex flex-col gap-10 basis-4/5">
-          {posts
-            ?.filter((item) => item.checkAdmin === true)
-            .map((post, idx) => (
-              <PostItem key={idx} post={post} />
-            ))}
-        </div>
-        <div className="basis-1/5">
-          <div className="text-xs uppercase text-white">Популярное:</div>
-
-          {popularPosts?.map((post, idx) => (
-            <PopularPosts key={idx} post={post} />
-          ))}
-        </div>
+    <>
+      <Search
+        setSeachByName={setSeachByName}
+        setSeachByArtist={setSeachByArtist}
+      />
+      {allFilter.length === 0 && (
+        <p style={{ textAlign: 'center', display: 'block' }}>
+          Постов по такому запросу нет..
+        </p>
+      )}
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          gap: '30px',
+          flexWrap: 'wrap',
+          marginBottom: '20px',
+        }}
+      >
+        {allFilter.map((post, idx) => (
+          <PostItem key={idx} post={post} />
+        ))}
       </div>
-    </div>
+    </>
   )
 }

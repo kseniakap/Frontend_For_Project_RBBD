@@ -1,0 +1,12 @@
+.item {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  padding: 10px 20px;
+  cursor: pointer;
+  &:hover a {
+    color: gray;
+  }
+  a {
+    transition: all 0.3s ease-in;
+  }
+}

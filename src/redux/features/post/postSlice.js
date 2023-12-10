@@ -1,18 +1,22 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../../utils/axios";
 
+
 const initialState = {
   posts: [],
   popularPosts: [],
   loading: false,
 };
+
+
+
 // Создание поста
 export const createPost = createAsyncThunk(
   "post/createPost",
   async (params) => {
     try {
       const { data } = await axios.post("/posts", params);
-      console.log(data)
+      console.log(data);
       return data;
     } catch (error) {
       console.log(error);

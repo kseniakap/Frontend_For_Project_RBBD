@@ -1,11 +1,64 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+}
+.container {
+  width: 1100px;
+  margin: 0 auto;
+  /* position: relative; */
+}
+a {
+  color: black;
+  text-decoration: none;
+}
+.block {
+  width: 450px;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.06);
+  padding: 40px 20px 50px;
+  border: 1px solid black;
+}
 
-@layer base {
-  body {
-    font-family: 'Poppins', sans-serif;
-    background: rgba(0,0,0,0.1);
-    min-height: 100vh;
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+h2 {
+  text-align: center;
+}
+input {
+  padding: 5px 10px;
+}
+.btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.comfirmBtn {
+  padding: 10px 20px;
+  background-color: #fff;
+  transition: 0.3s all ease-in;
+  cursor: pointer;
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.06);
   }
+}
+.backBtn {
+  padding: 10px 20px;
+  background-color: black;
+  color: #fff;
+  position: absolute;
+  bottom: 0;
+  right: 0;
 }
